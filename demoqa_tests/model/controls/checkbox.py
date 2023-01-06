@@ -1,6 +1,9 @@
 from selene import have
 from selene.support.shared import browser
 
-
-def hobby(selector, value):
-    browser.all(selector).element_by(have.text(value)).click()
+class JoeHobby:
+    def __init__(self,selector, value):
+        self.selector = selector
+        self.value = value
+    def hobby(self):
+        browser.all(self.selector).element_by(have.text(self.value)).click()

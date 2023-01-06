@@ -1,6 +1,30 @@
-from demoqa_tests.model.pages import practice_form
+from demoqa_tests.model.pages.data import user
+from demoqa_tests.model.pages.practice_form import PracticePage
 
 
+def test_practice():
+    john = PracticePage(user)
+    john.given_opened()
+    (john.type_firstname()
+        .type_lastname()
+        .type_email()
+        .select_gender()
+        .type_phone_number()
+        .click_on_datepicker()
+        .pick_month()
+        .pick_year()
+        .pick_day()
+        .type_subject()
+        .select_hobby()
+        .scroll_to_address()
+        .type_address()
+        .upload_picture()
+        .select_state()
+        .select_city()
+    )
+    john.submit()
+    john.assert_fields()
+'''    
 def test_student_registration_form():
     practice_form.given_opened()
 
@@ -46,3 +70,4 @@ def test_student_registration_form():
             'Some address',
             'NCR Delhi'
     )
+'''
