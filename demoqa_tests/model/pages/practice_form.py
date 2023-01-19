@@ -7,6 +7,7 @@ from demoqa_tests.model.controls.checkbox import JoeHobby
 from demoqa_tests.utils import path_to_file
 from demoqa_tests.utils.scroll import scroll_to
 
+
 class PracticePage:
     def __init__(self, person):
         self.person = person
@@ -14,80 +15,54 @@ class PracticePage:
     def submit(self):
         browser.element('#submit').press_enter()
         return self
+    def fill(self):
+            browser.open('/automation-practice-form')
+            browser.element('#firstName').type(self.person.first_name)
 
-    def given_opened(self):
-        browser.open('/automation-practice-form')
-        return self
+            browser.element('#lastName').type(self.person.last_name)
+
+            browser.element('#userEmail').type(self.person.email)
+            male = JoeGender('[name=gender]', self.person.male)
+            male.gender()
+            browser.element('#userNumber').type(self.person.number)
+
+            browser.element('#dateOfBirthInput').click()
+
+            browser.element('.react-datepicker__month-select').click()
+            month = JoeBirthday('.react-datepicker__month-select', self.person.month)
+            month.date()
+
+            browser.element('.react-datepicker__year-select').click()
+            year = JoeBirthday('.react-datepicker__year-select', self.person.year)
+            year.date()
+
+            browser.element(f'.react-datepicker__day--0{self.person.day}').click()
+
+            browser.element('#subjectsInput').type(self.person.subject).press_enter()
+
+            happy = JoeHobby('[for^=hobbies-checkbox]', self.person.hobbies)
+            happy.hobby()
+
+            scroll_to('#currentAddress')
+
+            browser.element('#currentAddress').type(self.person.address)
+
+
+            path_to_file.create_path('#uploadPicture', self.person.picture)
 
 
 
-    def select_state(self):
-        state=JoeDrop('#state', self.person.state)
-        state.select()
-        return self
+            state = JoeDrop('#state', self.person.state)
+            state.select()
 
-    def select_city(self):
-        city=JoeDrop('#city', self.person.city)
-        city.select()
-        return self
 
-    def type_firstname(self):
-        browser.element('#firstName').type(self.person.first_name)
-        return self
+            city = JoeDrop('#city', self.person.city)
+            city.select()
+            return self
 
-    def type_lastname(self):
-        browser.element('#lastName').type(self.person.last_name)
-        return self
 
-    def type_email(self):
-        browser.element('#userEmail').type(self.person.email)
-        return self
 
-    def type_phone_number(self):
-        browser.element('#userNumber').type(self.person.number)
-        return self
 
-    def type_address(self):
-        browser.element('#currentAddress').type(self.person.address)
-        return self
-
-    def select_gender(self):
-        male=JoeGender('[name=gender]', self.person.male)
-        male.gender()
-        return self
-
-    def select_hobby(self):
-        happy=JoeHobby('[for^=hobbies-checkbox]', self.person.hobbies)
-        happy.hobby()
-        return self
-
-    def pick_month(self):
-        browser.element('.react-datepicker__month-select').click()
-        month=JoeBirthday('.react-datepicker__month-select', self.person.month)
-        month.date()
-        return self
-
-    def pick_year(self):
-        browser.element('.react-datepicker__year-select').click()
-        year=JoeBirthday('.react-datepicker__year-select', self.person.year)
-        year.date()
-        return self
-
-    def pick_day(self):
-        browser.element(f'.react-datepicker__day--0{self.person.day}').click()
-        return self
-
-    def click_on_datepicker(self):
-        browser.element('#dateOfBirthInput').click()
-        return self
-
-    def type_subject(self):
-        browser.element('#subjectsInput').type(self.person.subject).press_enter()
-        return self
-
-    def upload_picture(self):
-        path_to_file.create_path('#uploadPicture', self.person.picture)
-        return self
 
 
     def assert_fields(self):
@@ -106,6 +81,3 @@ class PracticePage:
         ))
         return self
 
-    def scroll_to_address(self):
-        scroll_to('#currentAddress')
-        return self
