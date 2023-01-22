@@ -1,5 +1,3 @@
-from selene.support.shared import browser
-
 import os
 
 import pytest
@@ -8,16 +6,9 @@ from selenium.webdriver.chrome.options import Options
 from selene import Browser, Config
 from dotenv import load_dotenv
 
-from demoqa_tests.utils import attach
+from utils import attach
 
 DEFAULT_BROWSER_VERSION = "100.0"
-
-
-@pytest.fixture(scope="function", autouse=True)
-def open_browser():
-    browser.config.window_width = 1400
-    browser.config.window_height = 800
-    browser.config.base_url = 'https://demoqa.com'
 
 
 def pytest_addoption(parser):
