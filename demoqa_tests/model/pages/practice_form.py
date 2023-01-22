@@ -8,7 +8,6 @@ from demoqa_tests.utils import path_to_file
 from demoqa_tests.utils.scroll import scroll_to
 
 
-
 class PracticePage:
     def __init__(self, person):
         self.person = person
@@ -18,13 +17,15 @@ class PracticePage:
         return self
 
     def fill(self):
-
         browser.open('/automation-practice-form')
         browser.element('#firstName').type(self.person.first_name)
 
         browser.element('#lastName').type(self.person.last_name)
 
         browser.element('#userEmail').type(self.person.email)
+
+        scroll_to('[name=gender]')
+
         male = JoeGender('[name=gender]', self.person.male)
         male.gender()
         browser.element('#userNumber').type(self.person.number)
@@ -41,16 +42,18 @@ class PracticePage:
 
         browser.element(f'.react-datepicker__day--0{self.person.day}').click()
 
+        scroll_to('#currentAddress')
+
         browser.element('#subjectsInput').type(self.person.subject).press_enter()
 
         happy = JoeHobby('[for^=hobbies-checkbox]', self.person.hobbies)
         happy.hobby()
 
-        scroll_to('#currentAddress')
-
         browser.element('#currentAddress').type(self.person.address)
 
         path_to_file.create_path('#uploadPicture', self.person.picture)
+
+        scroll_to('#state')
 
         state = JoeDrop('#state', self.person.state)
         state.select()
