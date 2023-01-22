@@ -6,8 +6,7 @@ from demoqa_tests.model.controls.radiobutton import JoeGender
 from demoqa_tests.model.controls.checkbox import JoeHobby
 from demoqa_tests.utils import path_to_file
 from demoqa_tests.utils.scroll import scroll_to
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 class PracticePage:
@@ -19,7 +18,7 @@ class PracticePage:
         return self
 
     def fill(self):
-        browser.config.driver = webdriver.Chrome(ChromeDriverManager().install())
+
         browser.open('/automation-practice-form')
         browser.element('#firstName').type(self.person.first_name)
 

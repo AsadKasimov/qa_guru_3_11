@@ -4,6 +4,7 @@ from demoqa_tests.model.pages.practice_form import PracticePage
 from demoqa_tests.utils import attach
 from selene.support.shared import browser
 
+
 def test_practice():
     with allure.step('определяет данные для заполнения'):
         john = PracticePage(user)
